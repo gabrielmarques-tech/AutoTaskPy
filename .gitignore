@@ -1,0 +1,8 @@
+.env
+*.log
+automacao.log
+__pycache__/
+*.pyc
+.wdm/
+.vscode/
+clientes.txt
