@@ -6,3 +6,4 @@ __pycache__/
 .wdm/
 .vscode/
 clientes.txt
+clientes_liberacao.txt

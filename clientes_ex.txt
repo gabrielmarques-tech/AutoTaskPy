@@ -1,0 +1,4 @@
+# Coloque aqui os nomes dos clientes para REDUZIR, um por linha
+João da Silva
+Maria Oliveira
+Empresa XYZ
