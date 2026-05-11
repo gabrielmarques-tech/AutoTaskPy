@@ -3,19 +3,30 @@
 ![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)
 ![Selenium](https://img.shields.io/badge/Selenium-4.18-43B02A?logo=selenium&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Ativo-success)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Automação web para redução de serviços de clientes entre o sistema ERP **IXC Soft** e o **Radius Manager**, utilizando Python e Selenium.
+Automação web para gerenciamento de clientes entre o sistema ERP **IXC Soft** e o **Radius Manager**, utilizando Python e Selenium.
+
+Possui dois fluxos independentes:
+- **Redução** — reduz o serviço de clientes inadimplentes
+- **Liberação** — libera a conexão de clientes após pagamento
 
 ---
 
 ## 📋 O que faz
 
-- Lê uma lista de clientes do arquivo `clientes.txt`
-- Pesquisa cada cliente no **IXC Soft**
-- Extrai o ID do serviço do cliente
-- Aplica a redução de serviço no **Radius Manager**
-- Registra todo o processo em log (`automacao.log`)
+### Redução de clientes
+- Lê a lista de `clientes.txt`
+- Pesquisa cada cliente no IXC Soft
+- Extrai o ID do serviço
+- Aplica a redução de serviço no Radius Manager
+
+### Liberação de clientes
+- Lê a lista de `clientes_liberacao.txt`
+- Pesquisa cada cliente no IXC Soft
+- Obtém o ID e lê o plano contratado (ex: 150M / 50M)
+- Libera o contrato via Status Acesso → Liberar manualmente
+- Localiza o cliente no Radius e aplica o Service plan correto
+- Clica em Update User para confirmar
 
 ---
 
@@ -24,15 +35,21 @@ Automação web para redução de serviços de clientes entre o sistema ERP **IX
 ```
 AutoTaskPy/
 │
-├── main.py                  # Orquestrador principal do fluxo
-├── ixc.py                   # Todas as interações com o IXC Soft
-├── radius.py                # Todas as interações com o Radius Manager
-├── browser.py               # Criação do navegador Chrome (chromedriver automático)
+├── main.py                  # Executa a REDUÇÃO de clientes
+├── main_liberacao.py        # Executa a LIBERAÇÃO de clientes
+│
+├── ixc.py                   # Interações base com o IXC Soft
+├── ixc_liberacao.py         # Métodos extras do IXC para liberação
+│
+├── radius.py                # Interações base com o Radius Manager
+├── radius_liberacao.py      # Métodos extras do Radius para liberação
+│
+├── browser.py               # Criação do Chrome (chromedriver automático)
 ├── selenium_helpers.py      # Utilitários genéricos de Selenium
 ├── logger.py                # Log centralizado (arquivo + console)
 │
-├── clientes.txt             # Lista de clientes a processar (não versionado)
-├── .env                     # Credenciais (não versionado)
+├── clientes_ex.txt          # Modelo: nomes para reduzir
+├── clientes_liberacao_ex.txt # Modelo: nomes para liberar
 ├── .env.example             # Modelo de variáveis de ambiente
 ├── requirements.txt         # Dependências do projeto
 └── .gitignore
@@ -83,16 +100,32 @@ SENHA_R=senharadius
 
 **4. Adicione os clientes**
 
-Crie o arquivo `clientes.txt` com um nome por linha:
+Para reduzir — crie `clientes.txt` com um nome por linha:
 ```
 João da Silva
 Maria Oliveira
 Empresa XYZ
 ```
 
+Para liberar — crie `clientes_liberacao.txt` com um nome por linha:
+```
+João da Silva
+Maria Oliveira
+Empresa XYZ
+```
+
+> Veja os arquivos `clientes_ex.txt` e `clientes_liberacao_ex.txt` como modelo.
+
 **5. Execute**
+
+Para reduzir clientes:
 ```bash
 python main.py
+```
+
+Para liberar clientes:
+```bash
+python main_liberacao.py
 ```
 
 > ⚠️ O login do IXC utiliza **2FA manual**. Após rodar o script, complete a autenticação no navegador — a automação continua sozinha depois.
@@ -107,6 +140,7 @@ Por segurança, os seguintes arquivos **não são enviados ao GitHub**:
 |---|---|
 | `.env` | Contém senhas e credenciais |
 | `clientes.txt` | Dados sensíveis de clientes |
+| `clientes_liberacao.txt` | Dados sensíveis de clientes |
 | `automacao.log` | Log gerado localmente |
 | `__pycache__/` | Cache do Python |
 
@@ -124,9 +158,3 @@ Por segurança, os seguintes arquivos **não são enviados ao GitHub**:
 - [Selenium](https://www.selenium.dev/)
 - [webdriver-manager](https://github.com/SergeyPirogov/webdriver_manager)
 - [python-dotenv](https://github.com/theskumar/python-dotenv)
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
