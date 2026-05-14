@@ -10,6 +10,20 @@ Possui dois fluxos independentes:
 - **Redução** — reduz o serviço de clientes inadimplentes
 - **Liberação** — libera a conexão de clientes após pagamento
 
+## 💼 Contexto e impacto
+
+Desenvolvido para uso real em um provedor de internet (ISP), este projeto
+automatiza uma rotina operacional crítica que antes era feita manualmente.
+ 
+                       | Antes              | Depois      |
+|----------------------|--------------------|-------------|
+| Tempo por execução   | 2–3 horas (manual) | ~30 minutos |
+| Risco de erro humano | Alto               | Eliminado   |
+| Clientes por lote    | 40–50              | 40–50       |
+| Intervenção necessária| Total  | Mínima  (só 2FA inicial) |
+
+Desenvolvido de forma independente em ~3 meses, sem orientação externa.
+
 ---
 
 ## 📋 O que faz
