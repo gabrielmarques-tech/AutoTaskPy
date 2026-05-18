@@ -161,7 +161,8 @@ Por segurança, os seguintes arquivos **não são enviados ao GitHub**:
 
 ## 🖼️ Screenshots
 
-> *Em breve*
+<img width="1030" height="733" alt="reducao" src="https://github.com/user-attachments/assets/95ee738e-ce3d-4881-b2e6-0b7421da432f" />
+
 
 ---
 
