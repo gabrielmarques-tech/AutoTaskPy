@@ -161,7 +161,9 @@ Por segurança, os seguintes arquivos **não são enviados ao GitHub**:
 
 ## 🖼️ Screenshots
 
-<img width="1030" height="733" alt="reducao" src="https://github.com/user-attachments/assets/95ee738e-ce3d-4881-b2e6-0b7421da432f" />
+<img width="1356" height="724" alt="WhatsApp Image 2026-05-19 at 00 12 06" src="https://github.com/user-attachments/assets/1fbb2aab-c797-4710-8b3e-355176d4e472" />
+<img width="1233" height="657" alt="WhatsApp Image 2026-05-18 at 21 47 18" src="https://github.com/user-attachments/assets/85fb4319-8f23-4984-ba6f-c62c55dc2a95" />
+
 
 
 ---
